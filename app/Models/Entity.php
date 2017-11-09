@@ -12,8 +12,14 @@ class Entity extends Model
         return $this->belongsTo(EntityType::class);
     }
     
-    public function fields()
+    public function props()
     {
-        return $this->belongsToMany(EntityField::class)->withTimestamps();
+        return $this->belongsToMany(
+            EntityField::class,
+            'entity_field_entity_type',
+            'entity_type_id',
+            'entity_field_id',
+            'type_id'
+        );
     }
 }

@@ -16,6 +16,7 @@ class CreateEntityFieldsTable extends Migration
         Schema::create('entity_fields', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
         Schema::create('entity_field_entity_type', function (Blueprint $table) {

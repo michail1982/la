@@ -15,18 +15,16 @@ class EntitySeeder extends Seeder
         
         $fields = factory(App\Models\EntityField::class, 10)->create();
         
-        $entities = factory(App\Models\Entity::class, 25)->create();
-        
-        
         $types->each(function($type) use ($fields){
             $num_fields = rand(1, $fields->count());
             
             $type_fields = $fields->random($num_fields)->each(function($field) use($type) {
                 $type->fields()->attach($field);
             });
+            $type->attached();
         });
         
-        
-        
+            $entities = factory(App\Models\Entity::class, 25)->create();
+               
     }
 }

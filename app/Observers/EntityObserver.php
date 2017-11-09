@@ -3,6 +3,7 @@ namespace App\Observers;
 
 use App\Models\Entity;
 use Illuminate\Support\Facades\DB;
+use App\Models\EntityType;
 
 class EntityObserver
 {
@@ -14,7 +15,7 @@ class EntityObserver
      */
     public function saved(Entity $item)
     {
-        $table = 'entity_fields_'.$item->type->getKey();
+        $table = EntityType::TABLE_PREFIX.$item->type->getKey();
        
         if(DB::table($table)->where('entity_id', $item->getKey())->count()==0) {
             DB::table($table)->insert([
